@@ -1,0 +1,125 @@
+{% extends 'index/index.html.twig' %}
+{# {% block title %}{% endblock %} #}
+{% block additional_css %}
+    {{ parent() }}
+{% endblock %}
+{% block body %}
+   <header>
+        {% block header %}
+            {{parent()}}
+        {% endblock %}
+    </header>
+    
+    <section>
+        {% form_theme tri with ['form_div_layout.html.twig'] only %}
+        {{form_start(tri, {'attr': {'id': 'tri'}}) }}
+        {{form_end(tri)}}
+        <script>
+            $('select').change(function()
+            {
+                $('#tri').submit()
+            })
+        </script>
+        <div class="div_card">
+            {% for product in products %}
+                {% for eliquidProduct in  eliquidsProducts %}
+                    {% if product.id == eliquidProduct.product %}   
+                        <div class="card" nb={{loop.index}} >
+                            {% if product.nouveau == 1%}
+                                <span class="badge bg-secondary">New</span>
+                            {% endif %}
+                            <img src="{{ asset(''~ product.image ~'') }}" class="card-img-top" alt="Symfony!"/>
+                            
+                            <div class="card-body">
+                                <div class="infossup">
+                                    <ul>
+                                        <li><span class="gras">Saveur : </span>{{ eliquidProduct.Flavour }}</li>
+                                        <li><span class="gras">Collection : </span>{{ eliquidProduct.collection }}</li>
+                                        <li><span class="gras">Présence d'eau : </span>{{ eliquidProduct.water }}</li>
+                                        <li><span class="gras">Dosage recommandé : </span>{{ eliquidProduct.recommendedDosage }}</li>
+                                        <li><span class="gras">Temps de maturation : </span>{{ eliquidProduct.maturationTime }}</li>
+                                        <li><span class="gras">Notes Dominante : </span>{{eliquidProduct.DominantNotes}}</li>
+                                        <li><span class="gras">Type d'arome : </span>{{ eliquidProduct.TypeOfAroma }}</li>
+                                        <li><span class="gras">Propylène glycol : </span>{{ eliquidProduct.PG }}</li>
+                                        <li><span class="gras">Glycèrine végétal : </span>{{ eliquidProduct.VG }}</li>
+                                        <li><span class="gras">Présence d'alcool ajouté : </span>{{ eliquidProduct.AddedAlcohol }}</li>
+                                        <li><span class="gras">Type de nicotine : </span>{{ eliquidProduct.TypeOfNicotine }}</li>                                              
+                                        <li><span class="gras">Nicotine : </span>{{ eliquidProduct.Nicotine }}</li>
+                                        <li><span class="gras">Contenance : </span>{{ eliquidProduct.Capacity }}</li>
+                                        <li><span class="gras">Origine : </span>{{ eliquidProduct.Origin }}</li>
+                                    </ul>
+                                </div>
+                                <p class="price">{{product.price}} €</p>
+                                {# <form><input type="text" value="0"></input></form> #}
+                               <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addBasketModal{{loop.index}}">
+                                Ajouter au panier
+                                </button>-->
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="addBasketModal{{loop.index}}" tabindex="-1" role="dialog" aria-labelledby="addBasketModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="addBasketModalLabel">Ajouter au panier</h5>
+                                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <img src="{{ asset(''~ product.image ~'') }}" class="card-img-top" alt="Symfony!"/>
+                                                <form>
+                                                    <label for="quantite">quantité</label>
+                                                    <input id="quantite" type="number" value="1"><br>
+                                                    <label for="nicotine">Nicotine</label>
+                                                    <input id="nicotine" type="number" value="0"><label>mg/ml</label>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{loop.index}}">
+                                Voir plus
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal{{loop.index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Description</h5>
+                                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <ul>
+                                                    <li><span class="gras">Saveur : </span>{{ eliquidProduct.Flavour }}</li>
+                                                    <li><span class="gras">Notes Dominante : </span>{{eliquidProduct.DominantNotes}}</li>
+                                                    <li><span class="gras">Type d'arome : </span>{{ eliquidProduct.TypeOfAroma }}</li>
+                                                    <li><span class="gras">Propylène glycol : </span>{{ eliquidProduct.PG }}</li>
+                                                    <li><span class="gras">Glycèrine végétal : </span>{{ eliquidProduct.VG }}</li>
+                                                    <li><span class="gras">Présence d'alcool ajouté : </span>{{ eliquidProduct.AddedAlcohol }}</li>
+                                                    <li><span class="gras">Type de nicotine : </span>{{ eliquidProduct.TypeOfNicotine }}</li>                                              
+                                                    <li><span class="gras">Nicotine : </span>{{ eliquidProduct.Nicotine }}</li>
+                                                    <li><span class="gras">Contenance : </span>{{ eliquidProduct.Capacity }}</li>
+                                                    <li><span class="gras">Origine : </span>{{ eliquidProduct.Origin }}</li>
+                                                </ul>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,177 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LilySmoke{% endblock %}
+{% block additional_css %}
+    {# <link rel="stylesheet" href="{{asset('css/indexbis.css')}}"> #}
+    <link rel="stylesheet" href="{{asset('css/index.css')}}">
+{% endblock %}
+{% block body %}
+    <header>
+        {% block header %}
+            {# <h1 class="logo">logo</h1> #}
+            {# <img src="{{asset('images/logo.png')}}" alt="logo"> #}
+            <img src="{{asset('images/logo2.png')}}" alt="logo">
+            <nav>
+                <ul class="nav nav-tabs little-size">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">=</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item index1" href="/index">Accueil</a>
+                            <a class="dropdown-item ecig1" href="/ecig">E-cig</a>
+                            <a class="dropdown-item eliquid1" href="/eliquid">E-liquide</a>
+                            <a class="dropdown-item atomizer1" href="/atomizer">Cléro et Ato</a>
+                            <a class="dropdown-item fullkit1" href="/fullkit">FullKit</a>
+                            <a class="dropdown-item accessory1" href="/accessory">Accessoire</a>
+                            <a class="dropdown-item diy1" href="/diy">DIY</a>
+                            <a class="dropdown-item qui-sommes-nous" href="/qui-sommes-nous">Qui sommes nous ?</a>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="nav nav-tabs pc">
+                    
+                    <li class="nav-item accueil">
+                        <a class="nav-link index1" href="/index">Accueil</a>
+                    </li>
+                    <li class="nav-item ecig">
+                        <a class="nav-link ecig1" href="/ecig">E-cig</a>
+                    </li>
+                    <li class="nav-item eliquid">
+                        <a class="nav-link eliquid1" href="/eliquid">E-liquide</a>
+                    </li>
+                    <li class="nav-item ato">
+                        <a class="nav-link atomizer1" href="/atomizer">Cléro et Ato</a>
+                    </li>
+                    <li class="nav-item fullkit">
+                        <a class="nav-link fullkit1" href="/fullkit">FullKit</a>
+                    </li>
+                    <li class="nav-item accessory">
+                        <a class="nav-link accessory1" href="/accessory">Accessoire</a>
+                    </li>
+                    <li class="nav-item diy">
+                        <a class="nav-link diy1" href="/diy">DIY</a>
+                    </li>
+                    <li class="nav-item qui-sommes-nous">
+                        <a class="nav-link qui-sommes-nous1" href="/#/">Qui sommes nous ?</a>
+                    </li>
+                </ul>
+            </nav> 
+        {% endblock %}
+    </header>
+    <script type="text/javascript">
+        function textClignotant()
+        {
+            const element = document.getElementsByClassName('span_new');
+            const random = Math.round(Math.random() * 1);
+            for(let i=0; i<element.length; i++)
+            {
+                console.log(random);
+                switch (random)
+                {
+                    case 0:
+                    element[i].style.color = "red";
+                    break;
+                    
+                    case 1:
+                    element[i].style.color = "yellow";
+                    break;
+                }
+            }
+        }
+    </script>
+    <main>
+        
+        <section id="section_promote">
+            <h2 style='display:none;'>section promote</h2>
+            {% set total = nouveau | length %}
+            {% if total >1%} {#S'il n'y a pas au moins 2 produits on n'affiche pas#}
+            <div id="div_promote">
+                
+                <h1 id="promote">Nouveautés !!!</h1>
+                <div id="slider">
+                    <a href="#carouselExampleControls" role="button" data-slide="prev">
+                        <i class="fas fa-chevron-circle-left"></i>
+                    </a>
+                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            {% set min = 0 %}
+                            {% set total = nouveau | length %}
+                            {% set test = total /2 %}
+                            {% for i in 1.. test %}
+                                <div class="carousel-item {% if i == 1 %} active {% endif %}">
+                                    {% for nouv in  nouveau|slice(min,2) %}
+                                        <div class="card new" nb={{loop.index}} style="width:18rem;">
+                                            <span class="badge bg-secondary span_new">New</span>
+                                            <img src="{{ asset(''~ nouv.image ~'') }}" class="card-img-top" alt="Symfony!" height=300 width=120/>
+                                            <div class="card-body">
+                                                <h5 class="card-title">{{nouv.name}}</h5>
+                                                <h6>{{nouv.brand}}</h6>
+                                                <div class="infossup">
+                                                </div>
+                                                {# <p class="card-text">{{nouv.shortDescription}}</p> #}
+                                                <p class="price">{{nouv.price}} €</p>
+                                                <!-- Button trigger modal -->
+                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{loop.index}}">
+                                                Voir plus
+                                                </button>
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="exampleModal{{loop.index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Description</h5>
+                                                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                {# {{ nouv.description }} #}
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                {% set min = min + 2 %}
+                            {% endfor %}
+                           
+                        </div>
+                    </div>
+                    
+                    <a href="#carouselExampleControls" role="button" data-slide="next">
+                        <i class="fas fa-chevron-circle-right"></i>
+                    </a>
+                    </div>
+                </div>
+               
+            </div> 
+            {% endif %}
+            <script>
+                {# $(.carousel).carousel('pause') #}
+            </script>
+        </section>
+        
+        <section id="section_contact">
+            <h2 style='display:none;'>contact</h2>
+            <div class="contact show">
+                <div class="card card-body card_contact">
+                    <h4>Horaires d'ouverture</h4>
+                    <p>Du Lundi au Vendredi:<br> 9h30 - 12h30 et 14h - 19 h</p>
+                    <p>Samedi :<br> 9h30 - 19 h</p>
+                    <p>Dimanche :<br> FERMÉ</p>
+                    <a href="tel:04 37 41 25 41" class="phone_number"><i class="fas fa-phone-square-alt"></i> 04 37 41 25 41</a>
+                </div>
+            </div>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2792.1219893163084!2d4.76907491582801!3d45.588092379102626!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47f4e6ba5b2c07ad%3A0x4213ee989a6483fd!2sLilysmoke%20Givors!5e0!3m2!1sfr!2sfr!4v1592158110920!5m2!1sfr!2sfr" height="360" border="0" style="border:0;width:60%; border-radius: .25rem;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+        </section> 
+    </main>
+{% endblock %}
+{% block footer %}
+    {{ parent() }}
+    <script src="/script/cookiechoices.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function(event){cookieChoices.showCookieConsentBar('Ce site utilise des cookies pour vous offrir le meilleur service. En poursuivant votre navigation, vous acceptez l’utilisation des cookies.', 'J’accepte', 'En savoir plus', 'http://www.example.com/mentions-legales/');});</script>
+{% endblock %}

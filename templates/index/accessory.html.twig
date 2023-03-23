@@ -1,0 +1,70 @@
+{% extends 'index/index.html.twig' %}
+{# {% block title %}{% endblock %} #}
+{% block additional_css %}
+    {{ parent() }}
+{% endblock %}
+{% block body %}
+   <header>
+        {% block header %}
+            {{parent()}}
+        {% endblock %}
+    </header>
+    <section>
+        {% form_theme tri with ['form_div_layout.html.twig'] only %}
+        {{form_start(tri, {'attr': {'id': 'tri'}}) }}
+        {{form_end(tri)}}
+        <script>
+            $('#tri_option2').change(function()
+            {
+                $('#tri').submit();
+            })
+        </script>
+        <div class="div_card">
+            {% for product in products %}
+                {% for accessoryProduct in  accessorysProducts %}
+                    {% if product.id == accessoryProduct.product %}       
+                        <div class="card" nb={{loop.index}} style="width:18rem;">
+                            {% if product.nouveau == 1%}
+                                <span class="badge bg-secondary">New</span>
+                            {% endif %}
+                            <img src="{{ asset(''~ product.image ~'') }}" class="card-img-top" alt="Symfony!" height=300 width=120/>
+                            
+                            <div class="card-body">
+                                <h5 class="card-title">{{product.name}}</h5>
+                                <h6>{{product.brand}}</h6>
+                                {# <p class="card-text">{{product.shortDescription}}</p> #}
+                                <p class="price">{{product.price}} €</p>
+                                <!-- Button trigger modal -->
+                                {# <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal{{loop.index}}">
+                                Voir plus
+                                </button> #}
+
+                                <!-- Modal -->
+                                {# <div class="modal fade" id="exampleModal{{loop.index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Description</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <ul>
+                                                    <li><span class="gras">Description :</span>{{ product.description }}</li>
+                                                </ul>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> #}
+                            </div>
+                        </div> 
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}

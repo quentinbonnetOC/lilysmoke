@@ -1,0 +1,104 @@
+body{
+    background-color: lightgray;
+}
+.col-form-label{
+  width: fit-content;
+}
+label[for="product_shortDescription"]{
+  width: 16.6666666667%;
+}
+@media (min-width: 576px){
+  .col-sm-10{
+      width: 75% !important;
+  }
+}
+.edit_modal:hover i{
+  color: white;
+}
+.dataTables_wrapper .dataTables_filter input[type="search"]{
+  background-color: white;
+}
+#myTable_wrapper{
+  width: 90%;
+  margin: 2% auto 0 auto;
+}
+table#myTable {
+  width: 112%;
+  position: relative;
+  left: -6%;
+}
+.row{
+  justify-content: space-between;
+}
+.example-wrapper { 
+    margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; 
+}
+.example-wrapper code { 
+    background: #F5F5F5; padding: 2px 6px; 
+}
+i {
+    color:red;
+    font-size: 30px;
+}
+.alert{
+    display: none;
+    margin-bottom: unset;    
+}
+.progress
+{
+    display: none;
+    margin-bottom: 3%;
+}
+.progress-bar {
+    -webkit-animation: progress 3s linear;
+  }
+form[name='formNew']
+{
+  text-align: center;
+}
+  @-webkit-keyframes progress {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+  datalist
+  {
+      display: flex;
+      justify-content: space-between;
+  }
+  #eliquid_Nicotine
+  {
+      padding: unset;
+  }
+  #delete
+  {
+    border: unset;
+    background: unset;
+  }
+  td.details-control {
+    background: url('https://datatables.net/examples/resources/details_open.png') no-repeat center center;
+    cursor: pointer;
+}
+tr.shown td.details-control {
+    background: url('https://datatables.net/examples/resources/details_close.png') no-repeat center center;
+}
+.delete_button{
+  background-color: unset;
+  border: unset;
+}
+.edit_modal{
+  background-color: unset;
+  border: unset;
+}
+.fa-edit{
+  color: black;
+}
+td, th{
+  text-align: center;
+}
+.form-group{
+  text-align: start;
+}

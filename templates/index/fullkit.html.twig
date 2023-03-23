@@ -1,0 +1,125 @@
+{% extends 'index/index.html.twig' %}
+{# {% block title %}{% endblock %} #}
+{% block additional_css %}
+    {{ parent() }}
+{% endblock %}
+{% block body %}
+   <header>
+        {% block header %}
+            {{parent()}}
+        {% endblock %}
+    </header>
+    <section>
+        {% form_theme tri with ['form_div_layout.html.twig'] only %}
+        {{form_start(tri, {'attr': {'id': 'tri'}}) }}
+        {{form_end(tri)}}
+        <script>
+            $('#tri_option2').change(function()
+            {
+                $('#tri').submit();
+            })
+        </script>
+        <div class="div_card">
+            {% for product in products %}
+                {% for fullkitProduct in  fullkitsProducts %}
+                    {% if product.id == fullkitProduct.product %}       
+                        <div class="card" nb={{loop.index}} style="width:18rem;">
+                            {% if product.nouveau == 1%}
+                                <span class="badge bg-secondary">New</span>
+                            {% endif %}
+                            <img src="{{ asset(''~ product.image ~'') }}" class="card-img-top" alt="Symfony!" height=300 width=120/>
+                            
+                            <div class="card-body">
+                                <h5 class="card-title">{{product.name}}</h5>
+                                <h6>{{product.brand}}</h6>
+                                <div class="infossup">
+                                    <ul>
+                                        {# <li><span class="gras">Description :</span>{{ product.description }}</li> #}
+                                        <li><span class="gras">Longueur : </span>{{ fullkitProduct.length }}</li>
+                                        <li><span class="gras">Diametre : </span>{{ fullkitProduct.diameter }}</li>
+                                        <li><span class="gras">Contenance : </span>{{ fullkitProduct.capacity }}</li>
+                                        <li><span class="gras">Résistance : </span>{{ fullkitProduct.resistance }}</li>
+                                        <li><span class="gras">Remplissage : </span>{{ fullkitProduct.filling }}</li>
+                                        <li><span class="gras">Airflow : </span>{{ fullkitProduct.airflow }}</li>
+                                        <li><span class="gras">Puissance : </span>{{ fullkitProduct.power }}</li>
+                                        <li><span class="gras">Batterie : </span>{{ fullkitProduct.battery }}</li>
+                                        <li><span class="gras">Autonomie : </span>{{ fullkitProduct.autonomy }}</li>
+                                        <li><span class="gras">Fonctionnement : </span>{{ fullkitProduct.operation }}</li>
+                                        <li><span class="gras">Hauteur : </span>{{ fullkitProduct.height }}</li>
+                                        <li><span class="gras">Largeur : </span>{{ fullkitProduct.width }}</li>
+                                        <li><span class="gras">Poid : </span>{{ fullkitProduct.depth }}</li>
+                                        <li><span class="gras">Mattière : </span>{{ fullkitProduct.matter }}</li>
+                                        <li><span class="gras">Poid : </span>{{ fullkitProduct.weight }}</li>
+                                        <li><span class="gras">Type de batterie : </span>{{ fullkitProduct.typeOfBatteries }}</li>
+                                        <li><span class="gras">Nombre de batteries : </span>{{ fullkitProduct.numberOfBatteries }}</li>
+                                        <li><span class="gras">Rechargeable par USB : </span>{{ fullkitProduct.rechargableByUsb }}</li>
+                                        <li><span class="gras">Connection de rechargement : </span>{{ fullkitProduct.rechargingConnectors }}</li>
+                                        <li><span class="gras">Puissance maximum : </span>{{ fullkitProduct.maxPower }}</li>
+                                        <li><span class="gras">Voltage d'entré : </span>{{ fullkitProduct.inputVoltage }}</li>
+                                        <li><span class="gras">Voltage de sortie : </span>{{ fullkitProduct.outputVoltage }}</li>
+                                        <li><span class="gras">Voltage de charge : </span>{{ fullkitProduct.chargingVoltage }}</li>
+                                        <li><span class="gras">Ampérage de charge : </span>{{ fullkitProduct.chargingCurrent }}</li>
+                                        <li><span class="gras">Résistance compatible : </span>{{ fullkitProduct.compatibleResistance }}</li>
+                                    </ul>
+                                </div>
+                                {# <p class="card-text">{{product.shortDescription}}</p> #}
+                                <p class="price">{{product.price}} €</p>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{loop.index}}">
+                                Voir plus
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal{{loop.index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Description</h5>
+                                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <ul>
+                                                    {# <li><span class="gras">Description :</span>{{ product.description }}</li> #}
+                                                    <li><span class="gras">Longueur : </span>{{ fullkitProduct.length }}</li>
+                                                    <li><span class="gras">Diametre : </span>{{ fullkitProduct.diameter }}</li>
+                                                    <li><span class="gras">Contenance : </span>{{ fullkitProduct.capacity }}</li>
+                                                    <li><span class="gras">Résistance : </span>{{ fullkitProduct.resistance }}</li>
+                                                    <li><span class="gras">Remplissage : </span>{{ fullkitProduct.filling }}</li>
+                                                    <li><span class="gras">Airflow : </span>{{ fullkitProduct.airflow }}</li>
+                                                    <li><span class="gras">Puissance : </span>{{ fullkitProduct.power }}</li>
+                                                    <li><span class="gras">Batterie : </span>{{ fullkitProduct.battery }}</li>
+                                                    <li><span class="gras">Autonomie : </span>{{ fullkitProduct.autonomy }}</li>
+                                                    <li><span class="gras">Fonctionnement : </span>{{ fullkitProduct.operation }}</li>
+                                                    <li><span class="gras">Hauteur : </span>{{ fullkitProduct.height }}</li>
+                                                    <li><span class="gras">Largeur : </span>{{ fullkitProduct.width }}</li>
+                                                    <li><span class="gras">Poid : </span>{{ fullkitProduct.depth }}</li>
+                                                    <li><span class="gras">Mattière : </span>{{ fullkitProduct.matter }}</li>
+                                                    <li><span class="gras">Poid : </span>{{ fullkitProduct.weight }}</li>
+                                                    <li><span class="gras">Type de batterie : </span>{{ fullkitProduct.typeOfBatteries }}</li>
+                                                    <li><span class="gras">Nombre de batteries : </span>{{ fullkitProduct.numberOfBatteries }}</li>
+                                                    <li><span class="gras">Rechargeable par USB : </span>{{ fullkitProduct.rechargableByUsb }}</li>
+                                                    <li><span class="gras">Connection de rechargement : </span>{{ fullkitProduct.rechargingConnectors }}</li>
+                                                    <li><span class="gras">Puissance maximum : </span>{{ fullkitProduct.maxPower }}</li>
+                                                    <li><span class="gras">Voltage d'entré : </span>{{ fullkitProduct.inputVoltage }}</li>
+                                                    <li><span class="gras">Voltage de sortie : </span>{{ fullkitProduct.outputVoltage }}</li>
+                                                    <li><span class="gras">Voltage de charge : </span>{{ fullkitProduct.chargingVoltage }}</li>
+                                                    <li><span class="gras">Ampérage de charge : </span>{{ fullkitProduct.chargingCurrent }}</li>
+                                                    <li><span class="gras">Résistance compatible : </span>{{ fullkitProduct.compatibleResistance }}</li>
+                                                </ul>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}

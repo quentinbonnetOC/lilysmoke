@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html lang="fr-FR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- <meta lang="fr-FR"> -->
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <!-- css bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+        <!-- end css bootstrap -->
+        <!-- css datatable -->
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
+        <!-- end datatable  -->
+
+        {% block additional_css %} <link rel="stylesheet" href="{{asset('css/index.css')}}">  {% endblock %}
+        <!-- js jquery -->
+        <!--<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>-->
+        <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+        <!-- end js jquery -->
+        <!-- js boostrap -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+        <!-- end js bootstrap -->
+        <!-- js fontawesome -->
+        <script src="https://kit.fontawesome.com/679ed7c089.js" crossorigin="anonymous"></script>
+        <!-- end js fontawesome -->
+        <!-- js datatable -->
+        <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+        <!-- end js datatable -->
+        <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.18/lodash.min.js"></script>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-GW3JPY3N1F"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-GW3JPY3N1F');
+        </script>
+    </head>
+    <body>
+        {% block body %}
+            {% block header %}{% endblock %}
+        {% endblock %}
+        {% block javascripts %}{% endblock %}
+          <script>
+            $(document).ready(function() {  
+                let categorie = window.location.pathname.substring(1);
+                $('.'+categorie+'1').css("backgroundColor", "#0062cc");
+                $('.'+categorie+'1').css("color", "#fff");
+            });
+        </script>
+    </body>
+    <footer>
+        {% block footer %}
+            <a href="{{asset("/index/legaleNotice")}}">Mentions légales</a>
+        {% endblock %}
+    </footer>
+</html>

@@ -1,0 +1,19 @@
+.image
+{
+    width: 25%;
+    position: relative;
+}
+ul
+{
+    
+}
+div
+{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.gras
+{
+    font-weight: bold;
+}

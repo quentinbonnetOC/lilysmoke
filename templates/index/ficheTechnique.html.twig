@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{# {% block title %}{% endblock %} #}
+{% block additional_css %}
+    <link rel="stylesheet" href="{{asset('css/ficheTechnique.css')}}">
+{% endblock %}
+{% block body %}
+<div>
+    <img src="{{ asset(''~ product.image ~'') }}" id="image{{product.id}}" class="image" alt="Symfony!" width='45%'/>
+
+    <ul>
+        <li><span class="gras">Marque : </span>{{ product.brand }}</li>
+        <li><span class="gras">Model : </span>{{ product.name }}</li>
+        <li><span class="gras">Prix : </span>{{ product.price }} €</li>
+        <li><span class="gras">Description : </span>{{ product.description }}</li>
+        <li><span class="gras">Notes Dominantes : </span>{{ eliquid.DominantNotes }}</li>
+        <li><span class="gras">Type d'arome : </span>{{ eliquid.TypeOfAroma }}</li>
+        <li><span class="gras">Ratio PG/VG : </span>{{ eliquid.ratio }}</li>
+        <li><span class="gras">Nicotine : </span>{{ eliquid.Nicotine }}</li>
+        <li><span class="gras">Capacité : </span>{{ eliquid.Capacity }}</li>
+        <li><span class="gras">Origine : </span>{{ eliquid.Origin }}</li>
+    </ul>
+</div>
+  
+
+    
+{% endblock %}

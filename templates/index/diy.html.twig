@@ -1,0 +1,102 @@
+{% extends 'index/index.html.twig' %}
+{# {% block title %}{% endblock %} #}
+{% block additional_css %}
+    {{ parent() }}
+{% endblock %}
+{% block body %}
+   <header>
+        {% block header %}
+            {{parent()}}
+        {% endblock %}
+    </header>
+    </script>
+    <section>
+        {% form_theme tri with ['form_div_layout.html.twig'] only %}
+        {{form_start(tri, {'attr': {'id': 'tri'}}) }}
+        {{form_end(tri)}}
+        <script>
+            $('#tri_option2').change(function()
+            {
+                $('#tri').submit();
+            })
+        </script>
+        <div class="div_card">
+            {% for product in products %}
+                {% for diyProduct in  diysProducts %}
+                    {% if product.id == diyProduct.product %}       
+                        <div class="card" nb={{loop.index}} style="width: 18rem;">
+                            {% if product.nouveau == 1%}
+                                <span class="badge bg-secondary">New</span>
+                            {% endif %}
+                            <img src="{{ asset(''~ product.image ~'') }}" class="card-img-top" alt="Symfony!" height=300 width=120/>
+                            
+                            <div class="card-body">
+                                <div class="infossup">
+                                    <ul>
+                                        <li><span class="gras">Type d'arome :</span>{{diyProduct.TypeOfAroma}}</li>
+                                        <li><span class="gras">Capacité : </span>{{ diyProduct.Capacity }}</li>  
+                                        <li><span class="gras">Collection : </span>{{ diyProduct.collection }}</li>                                                
+                                        <li><span class="gras">Notes dominantes : </span>{{ diyProduct.DominantNotes }}</li>                                                
+                                        <li><span class="gras">Saveur : </span>{{ diyProduct.Flavour }}</li>                                                
+                                        <li><span class="gras">PG : </span>{{ diyProduct.PG }}</li>                                                
+                                        <li><span class="gras">VG : </span>{{ diyProduct.VG }}</li>                                                
+                                        <li><span class="gras">Type de nicotine : </span>{{ diyProduct.TypeOfNicotine }}</li>                                                
+                                        <li><span class="gras">Présence d'eau: </span>{{ diyProduct.water }}</li>                                                
+                                        <li><span class="gras">Présence d'alcool ajouté : </span>{{ diyProduct.addedAlcohol }}</li>
+                                        <li><span class="gras">Temps de maturation : </span>{{ diyProduct.maturationTime }}</li>                                                
+                                        <li><span class="gras">Taux de nicotine : </span>{{ diyProduct.Nicotine }}</li>                                                
+                                        <li><span class="gras">Origine : </span>{{ diyProduct.Origin }}</li>                                                
+                                        <li><span class="gras">Dosage recommendé : </span>{{ diyProduct.recommendedDosage }}</li>
+                                    </ul>
+                                </div>
+                                <h5 class="card-title">{{product.name}}</h5>
+                                <h6>{{product.brand}}</h6>
+                                {# <p class="card-text">{{product.shortDescription}}</p> #}
+                                <p class="price">{{product.price}} €</p>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{loop.index}}">
+                                Voir plus
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal{{loop.index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Description</h5>
+                                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <ul>
+                                                    <li><span class="gras">Type d'arome :</span>{{diyProduct.TypeOfAroma}}</li>
+                                                    <li><span class="gras">Capacité : </span>{{ diyProduct.Capacity }}</li>  
+                                                    <li><span class="gras">Collection : </span>{{ diyProduct.collection }}</li>                                                
+                                                    <li><span class="gras">Notes dominantes : </span>{{ diyProduct.DominantNotes }}</li>                                                
+                                                    <li><span class="gras">Saveur : </span>{{ diyProduct.Flavour }}</li>                                                
+                                                    <li><span class="gras">PG : </span>{{ diyProduct.PG }}</li>                                                
+                                                    <li><span class="gras">VG : </span>{{ diyProduct.VG }}</li>                                                
+                                                    <li><span class="gras">Type de nicotine : </span>{{ diyProduct.TypeOfNicotine }}</li>                                                
+                                                    <li><span class="gras">Présence d'eau: </span>{{ diyProduct.water }}</li>                                                
+                                                    <li><span class="gras">Présence d'alcool ajouté : </span>{{ diyProduct.addedAlcohol }}</li>
+                                                    <li><span class="gras">Temps de maturation : </span>{{ diyProduct.maturationTime }}</li>                                                
+                                                    <li><span class="gras">Taux de nicotine : </span>{{ diyProduct.Nicotine }}</li>                                                
+                                                    <li><span class="gras">Origine : </span>{{ diyProduct.Origin }}</li>                                                
+                                                    <li><span class="gras">Dosage recommendé : </span>{{ diyProduct.recommendedDosage }}</li>
+                                                </ul>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}
